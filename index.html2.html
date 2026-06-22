@@ -4,10 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AmBlackKnighT · KnighTPlayzZz</title>
-  <!-- Font Awesome 6 (free) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* ----- CSS variables – dark charcoal with #3A9D5B accent ----- */
+    /* ----- CSS variables – dark charcoal with #3A9D5B green accent ----- */
     :root {
       --bg-primary: #1B1C1D;
       --bg-center: #151515;
@@ -16,11 +14,8 @@
       --text-primary: #f0f0f0;
       --text-secondary: #b0b0b0;
       --accent: #3A9D5B;
-      --accent-hover: #3CA05F;
       --accent-glow: rgba(58, 157, 91, 0.4);
-      --card-bg: rgba(30, 30, 30, 0.7);
       --border-glass: rgba(255, 255, 255, 0.06);
-      --shadow-heavy: 0 12px 40px rgba(0, 0, 0, 0.7);
     }
 
     * {
@@ -33,11 +28,12 @@
     body {
       background: var(--bg-primary);
       color: var(--text-primary);
-      line-height: 1.6;
-      scroll-behavior: smooth;
       min-height: 100vh;
       background: radial-gradient(ellipse at 50% 40%, #151515 0%, #1B1C1D 60%, #222322 100%);
       background-attachment: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* ----- glass-morphism navbar (fixed) ----- */
@@ -56,7 +52,6 @@
       align-items: center;
       justify-content: space-between;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
-      transition: background 0.2s;
     }
 
     .logo {
@@ -69,134 +64,19 @@
       color: var(--accent);
     }
 
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
     .nav-links {
       display: flex;
       gap: 2.2rem;
       list-style: none;
       align-items: center;
     }
-    .nav-links a {
+    .nav-links span {
       color: var(--text-primary);
-      text-decoration: none;
       font-weight: 500;
       font-size: 1rem;
-      transition: 0.25s ease;
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 0%;
-      height: 2px;
-      background: var(--accent);
-      transition: 0.3s;
-    }
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-    .nav-links a:hover::after {
-      width: 100%;
+      cursor: default;
     }
 
-    /* ----- 3-DOT DROPDOWN MENU ----- */
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
-    .dropdown-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-primary);
-      font-size: 1.8rem;
-      cursor: pointer;
-      padding: 0 8px;
-      transition: 0.3s;
-      line-height: 1;
-    }
-    .dropdown-btn:hover {
-      color: var(--accent);
-      transform: rotate(90deg);
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      right: 0;
-      top: 100%;
-      min-width: 280px;
-      background: var(--bg-glass);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border-glass);
-      border-radius: 16px;
-      padding: 0.8rem 0;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
-      margin-top: 10px;
-      z-index: 1000;
-    }
-
-    .dropdown-content.show {
-      display: block;
-      animation: fadeIn 0.25s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ----- ALL DROPDOWN TEXT IS GREEN ----- */
-    .dropdown-content .dropdown-item {
-      display: block;
-      padding: 0.7rem 1.5rem;
-      color: var(--accent) !important;
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: 0.2s;
-      border: none;
-      background: transparent;
-      width: 100%;
-      text-align: left;
-      cursor: pointer;
-    }
-
-    .dropdown-content .dropdown-item:hover {
-      background: rgba(58, 157, 91, 0.15);
-      color: var(--accent-hover) !important;
-    }
-
-    .dropdown-content .dropdown-item i {
-      color: var(--accent) !important;
-      width: 22px;
-      margin-right: 10px;
-      text-align: center;
-    }
-
-    .dropdown-divider {
-      height: 1px;
-      background: var(--border-glass);
-      margin: 0.4rem 1rem;
-    }
-
-    .dropdown-label {
-      padding: 0.4rem 1.5rem;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--accent) !important;
-      opacity: 0.7;
-    }
-
-    /* ----- hamburger (mobile) ----- */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -242,605 +122,72 @@
         opacity: 1;
         pointer-events: all;
       }
-      .dropdown-content {
-        right: -20px;
-        min-width: 240px;
-      }
     }
 
-    /* ----- sections ----- */
-    section {
-      padding: 4rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
+    /* ----- hero section (centered) ----- */
     .hero {
-      min-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 2rem 2rem 2rem 2rem;
-      background: transparent;
-      border-bottom: 1px solid #2a2a2a;
-      margin-bottom: 1rem;
+      text-align: center;
+      padding: 2rem;
     }
     .hero h1 {
-      font-size: 3.8rem;
+      font-size: 5rem;
       font-weight: 800;
       letter-spacing: -0.5px;
-      margin-bottom: 0.5rem;
       color: var(--text-primary);
     }
     .hero h1 .highlight {
       color: var(--accent);
       text-shadow: 0 0 20px var(--accent-glow);
     }
-    .hero p {
-      font-size: 1.3rem;
-      max-width: 650px;
-      color: var(--text-secondary);
-      margin-bottom: 2rem;
-    }
-    .hero p strong {
-      color: var(--accent);
-    }
-    .hero-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.85rem 2.2rem;
-      background: transparent;
-      border: 2px solid var(--accent);
-      color: var(--text-primary);
-      font-weight: 600;
-      font-size: 1rem;
-      border-radius: 50px;
-      text-decoration: none;
-      transition: 0.25s ease;
-      cursor: pointer;
-      background: rgba(58, 157, 91, 0.05);
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: #0b0b0b;
-      border: 2px solid var(--accent);
-      font-weight: 700;
-    }
-    .btn-primary:hover {
-      background: transparent;
-      color: var(--accent);
-      transform: scale(1.05);
-      box-shadow: 0 0 20px var(--accent-glow);
-    }
-    .btn-outline:hover {
-      background: var(--accent);
-      color: #0b0b0b;
-      transform: scale(1.05);
-      box-shadow: 0 0 20px var(--accent-glow);
-    }
-    .btn i {
-      font-size: 1.1rem;
-    }
 
-    .section-title {
-      font-size: 2.2rem;
-      font-weight: 700;
-      margin-bottom: 2.2rem;
-      border-left: 6px solid var(--accent);
-      padding-left: 1rem;
-      color: var(--text-primary);
-    }
-    .section-title i {
-      color: var(--accent);
-    }
-
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-top: 1rem;
-    }
-    .video-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(4px);
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid var(--border-glass);
-      transition: 0.3s ease;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-    }
-    .video-card:hover {
-      transform: scale(1.02) translateY(-6px);
-      border-color: var(--accent);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.7);
-    }
-    .video-thumb {
-      width: 100%;
-      aspect-ratio: 16/9;
-      background: #1e1e1e;
-      position: relative;
-      overflow: hidden;
-    }
-    .video-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: 0.3s;
-    }
-    .video-card:hover .video-thumb img {
-      transform: scale(1.03);
-    }
-    .video-info {
-      padding: 1.2rem 1.2rem 1.5rem;
-    }
-    .video-info h4 {
-      font-size: 1.1rem;
-      margin-bottom: 0.4rem;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .video-info a {
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-    .video-info a:hover {
-      color: var(--accent);
-    }
-    .video-meta {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      display: flex;
-      gap: 1rem;
-      margin-top: 0.5rem;
-    }
-    .video-meta i {
-      color: var(--accent);
-      margin-right: 4px;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.2rem;
-      text-align: center;
-      background: var(--card-bg);
-      padding: 2rem 1.5rem;
-      border-radius: 28px;
-      backdrop-filter: blur(4px);
-      border: 1px solid var(--border-glass);
-    }
-    .stat-item {
-      padding: 0.5rem;
-    }
-    .stat-number {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: var(--accent);
-      display: block;
-    }
-    .stat-label {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      letter-spacing: 0.5px;
-    }
-    .about-text {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-    }
-    .about-text strong {
-      color: var(--text-primary);
-    }
-
-    .contact-form {
-      max-width: 640px;
-      margin: 0 auto;
-      background: var(--card-bg);
-      padding: 2.2rem 2.5rem;
-      border-radius: 32px;
-      backdrop-filter: blur(8px);
-      border: 1px solid var(--border-glass);
-    }
-    .form-group {
-      margin-bottom: 1.2rem;
-    }
-    .form-group label {
-      display: block;
-      font-weight: 500;
-      margin-bottom: 0.3rem;
-      color: var(--text-secondary);
-    }
-    .form-group label i {
-      color: var(--accent);
-      margin-right: 6px;
-    }
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 0.9rem 1.2rem;
-      background: rgba(0,0,0,0.5);
-      border: 1px solid #333;
-      border-radius: 30px;
-      color: white;
-      font-size: 1rem;
-      transition: 0.25s;
-      outline: none;
-    }
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-glow);
-    }
-    .form-group textarea {
-      min-height: 120px;
-      resize: vertical;
-      border-radius: 20px;
-    }
-    .btn-submit {
-      background: var(--accent);
-      border: none;
-      color: #0b0b0b;
-      font-weight: 700;
-      padding: 0.9rem 2.5rem;
-      border-radius: 60px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.25s;
-      width: 100%;
-    }
-    .btn-submit:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 30px var(--accent-glow);
-      background: var(--accent-hover);
-    }
-    .btn-submit i {
-      margin-right: 8px;
-    }
-
-    /* ----- BANNER SECTION (bottom of page) ----- */
-    .banner-section {
-      text-align: center;
-      padding: 2rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .banner-section .banner-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 1.5rem;
-    }
-    .banner-section .banner-container a {
-      display: inline-block;
-      transition: 0.3s ease;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border-glass);
-    }
-    .banner-section .banner-container a:hover {
-      transform: scale(1.03);
-      border-color: var(--accent);
-      box-shadow: 0 0 30px var(--accent-glow);
-    }
-    .banner-section .banner-container img {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
-    }
-
-    .banner-text-link {
-      display: inline-block;
-      color: var(--accent);
-      font-size: 1.1rem;
-      font-weight: 600;
-      text-decoration: none;
-      padding: 0.8rem 2rem;
-      border: 2px solid var(--accent);
-      border-radius: 50px;
-      transition: 0.3s ease;
-      margin-bottom: 1.5rem;
-      background: rgba(58, 157, 91, 0.05);
-    }
-    .banner-text-link:hover {
-      background: var(--accent);
-      color: #0b0b0b;
-      transform: scale(1.05);
-      box-shadow: 0 0 30px var(--accent-glow);
-    }
-    .banner-text-link i {
-      margin-right: 8px;
-    }
-
-    .footer {
-      text-align: center;
-      padding: 2.5rem 2rem;
-      border-top: 1px solid #222;
-      margin-top: 0rem;
-    }
-    .social-icons {
-      display: flex;
-      justify-content: center;
-      gap: 1.8rem;
-      margin-bottom: 1.2rem;
-      flex-wrap: wrap;
-    }
-    .social-icons a {
-      color: var(--text-secondary);
+    .hero .sub-title {
       font-size: 1.8rem;
-      transition: 0.25s;
-      display: inline-block;
-    }
-    .social-icons a:hover {
-      color: var(--accent);
-      transform: scale(1.2) rotate(-4deg);
-    }
-    .footer p {
       color: var(--text-secondary);
-      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      font-weight: 300;
+      letter-spacing: 2px;
     }
-    .footer span {
+    .hero .sub-title span {
       color: var(--accent);
     }
-    .footer .heart {
-      color: var(--accent);
-    }
-
-    .text-center { text-align: center; }
-    .mt-2 { margin-top: 1.8rem; }
 
     @media (max-width: 768px) {
-      .hero h1 { font-size: 2.7rem; }
-      .hero p { font-size: 1.1rem; }
-      .about-grid { grid-template-columns: 1fr; }
-      .stats { grid-template-columns: repeat(3, 1fr); }
-      .contact-form { padding: 1.8rem; }
-      .section-title { font-size: 1.8rem; }
-      .video-grid { grid-template-columns: 1fr; }
-      .banner-section .banner-container {
-        flex-direction: column;
-      }
+      .hero h1 { font-size: 3rem; }
+      .hero .sub-title { font-size: 1.2rem; }
     }
     @media (max-width: 480px) {
-      .hero h1 { font-size: 2.1rem; }
-      .stats { grid-template-columns: 1fr 1fr; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero .sub-title { font-size: 1rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ============================================================ -->
-  <!--  FIXED NAVBAR WITH 3-DOT DROPDOWN                           -->
-  <!-- ============================================================ -->
+  <!-- fixed glass navbar -->
   <nav class="navbar" role="navigation">
     <div class="logo"><span>Am</span>Black<span>KnighT</span></div>
-    
-    <div class="nav-right">
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#videos">Videos</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      
-      <!-- 3-DOT DROPDOWN -->
-      <div class="dropdown" id="dropdownMenu">
-        <button class="dropdown-btn" id="dropdownBtn" aria-label="Menu">
-          <i class="fas fa-ellipsis-v"></i>
-        </button>
-        <div class="dropdown-content" id="dropdownContent">
-          
-          <!-- ========================================================== -->
-          <!--  ✏️ CUSTOMIZE: All text here is GREEN by default           -->
-          <!--  Add your own text or links below                         -->
-          <!-- ========================================================== -->
-          
-          <div class="dropdown-label">── quick links ──</div>
-          
-          <!-- ✏️ Your custom text (green) -->
-          <span class="dropdown-item" style="cursor:default;">
-            <i class="fas fa-globe"></i> My Website
-          </span>
-          
-          <!-- ✏️ Your custom text (green) -->
-          <span class="dropdown-item" style="cursor:default;">
-            <i class="fas fa-user"></i> My Profile
-          </span>
-          
-          <!-- ✏️ Your custom text (green) -->
-          <span class="dropdown-item" style="cursor:default;">
-            <i class="fas fa-cog"></i> Settings
-          </span>
-          
-          <div class="dropdown-divider"></div>
-          
-          <div class="dropdown-label">── social ──</div>
-          
-          <!-- ✏️ Your custom text (green) -->
-          <span class="dropdown-item" style="cursor:default;">
-            <i class="fab fa-youtube"></i> YouTube
-          </span>
-          
-          <!-- ✏️ Your custom text (green) -->
-          <span class="dropdown-item" style="cursor:default;">
-            <i class="fab fa-discord"></i> Discord
-          </span>
-          
-          <!-- ✏️ Your custom text (green) -->
-          <span class="dropdown-item" style="cursor:default;">
-            <i class="fab fa-twitch"></i> Twitch
-          </span>
-          
-          <div class="dropdown-divider"></div>
-          
-          <div class="dropdown-label">── info ──</div>
-          
-          <!-- ✏️ Your custom text (green) -->
-          <span class="dropdown-item" style="cursor:default;">
-            <i class="fas fa-info-circle"></i> Version 2.0
-          </span>
-          
-          <!-- ✏️ Your custom text (green) -->
-          <span class="dropdown-item" style="cursor:default;">
-            <i class="fas fa-calendar"></i> Updated: June 2026
-          </span>
-          
-          <!-- ========================================================== -->
-          <!--  END OF CUSTOMIZABLE DROPDOWN ITEMS                        -->
-          <!--  Just duplicate the <span> blocks to add more!             -->
-          <!-- ========================================================== -->
-          
-        </div>
-      </div>
-      
-      <button class="hamburger" id="hamburger" aria-label="menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+    <button class="hamburger" id="hamburger" aria-label="menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <span>Home</span>
+      <span>About</span>
+      <span>Features</span>
+      <span>Contact</span>
+    </ul>
   </nav>
 
   <!-- ============================================================ -->
-  <!--  HERO SECTION                                                -->
+  <!--  HERO SECTION (centered)                                     -->
   <!-- ============================================================ -->
-  <section id="hero" class="hero">
+  <section class="hero">
     <h1>Am<span class="highlight">BlackKnighT</span></h1>
-    <p>Competitive gaming &amp; esports — strategies, tournaments, and the thrill of victory. <br>Welcome to <strong>KnighTPlayzZz</strong>.</p>
-    <div class="hero-buttons">
-      <a href="#videos" class="btn btn-primary"><i class="fab fa-youtube"></i> Latest Plays</a>
-      <a href="https://www.youtube.com/@KnighTPlayzZz001" target="_blank" class="btn btn-outline"><i class="fab fa-youtube"></i> Subscribe</a>
-    </div>
+    <p class="sub-title">- <span>KnighTPlayzZz</span> -</p>
   </section>
-
-  <!-- ============================================================ -->
-  <!--  VIDEO FEED                                                  -->
-  <!-- ============================================================ -->
-  <section id="videos">
-    <h2 class="section-title"><i class="fab fa-youtube"></i> latest videos</h2>
-    <div id="videoContainer" class="video-grid">
-      <div class="text-center" style="grid-column:1/-1; color: var(--text-secondary);">Loading videos …</div>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!--  ABOUT + STATS                                               -->
-  <!-- ============================================================ -->
-  <section id="about">
-    <h2 class="section-title">about the channel</h2>
-    <div class="about-grid">
-      <div class="about-text">
-        <p><strong>KnighTPlayzZz</strong> is the ultimate hub for competitive gamers and esports enthusiasts. From pro strategies to community tournaments, we bring the heat. Join our vibrant community and level up your game.</p>
-        <p style="margin-top: 1.2rem;"><i class="fas fa-gamepad" style="color:var(--accent);"></i> &nbsp; AmBlackKnighT · competitive gaming · esports</p>
-      </div>
-      <div class="stats">
-        <div class="stat-item"><span class="stat-number">12.5K</span><span class="stat-label">Subscribers</span></div>
-        <div class="stat-item"><span class="stat-number">86</span><span class="stat-label">Videos</span></div>
-        <div class="stat-item"><span class="stat-number">240K</span><span class="stat-label">Total views</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!--  CONTACT FORM                                                -->
-  <!-- ============================================================ -->
-  <section id="contact">
-    <h2 class="section-title">contact</h2>
-    <div class="contact-form">
-      <form id="contactForm" onsubmit="event.preventDefault(); alert('📬 Thanks for reaching out! AmBlackKnighT will respond.');">
-        <div class="form-group">
-          <label for="name"><i class="far fa-user"></i> Name</label>
-          <input type="text" id="name" placeholder="Your name" required>
-        </div>
-        <div class="form-group">
-          <label for="email"><i class="far fa-envelope"></i> Email</label>
-          <input type="email" id="email" placeholder="you@example.com" required>
-        </div>
-        <div class="form-group">
-          <label for="message"><i class="far fa-comment"></i> Message</label>
-          <textarea id="message" placeholder="Send a message to AmBlackKnighT ..." required></textarea>
-        </div>
-        <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Send</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!--  📢 BANNER SECTION (bottom of page, above footer)           -->
-  <!-- ============================================================ -->
-  <section class="banner-section">
-    <h2 class="section-title"><i class="fas fa-ad"></i> sponsors</h2>
-    
-    <a href="https://exe.io/ref/amblackknight" target="_blank" class="banner-text-link">
-      <i class="fas fa-external-link-alt"></i> exe.io/ref/amblackknight
-    </a>
-    
-    <div class="banner-container">
-      
-      <a href="https://exe.io/ref/ambackknight" target="_blank">
-        <img src="https://exe.io/img/ref/r1.gif" alt="CuT URLs - Earn money by shortening links with the highest CPMs Ever!" title="CuT URLs - Earn money by shortening links with the highest CPMs Ever!" />
-      </a>
-      
-      <a href="https://exe.io/ref/amblackknight" target="_blank">
-        <img src="https://exe.io/img/ref/r4.png" alt="CuT URLs - Earn money by shortening links with the highest CPMs Ever!" title="CuT URLs - Earn money by shortening links with the highest CPMs Ever!" />
-      </a>
-      
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!--  FOOTER                                                      -->
-  <!-- ============================================================ -->
-  <footer class="footer">
-    <div class="social-icons">
-      <a href="https://www.youtube.com/@KnighTPlayzZz001" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-      <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-      <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="#" target="_blank" aria-label="Twitch"><i class="fab fa-twitch"></i></a>
-      <a href="https://discord.gg/AtySzWru" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
-    </div>
-    <p>&copy; 2026 <span>AmBlackKnighT</span> · KnighTPlayzZz · built with <i class="fas fa-heart heart"></i></p>
-  </footer>
 
   <script>
     (function() {
       "use strict";
-
-      // ----- DROPDOWN toggle -----
-      const dropdownBtn = document.getElementById('dropdownBtn');
-      const dropdownContent = document.getElementById('dropdownContent');
-
-      if (dropdownBtn && dropdownContent) {
-        dropdownBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          dropdownContent.classList.toggle('show');
-        });
-
-        document.addEventListener('click', function(e) {
-          if (!dropdownBtn.contains(e.target) && !dropdownContent.contains(e.target)) {
-            dropdownContent.classList.remove('show');
-          }
-        });
-
-        document.addEventListener('keydown', function(e) {
-          if (e.key === 'Escape') {
-            dropdownContent.classList.remove('show');
-          }
-        });
-      }
 
       // ----- HAMBURGER toggle -----
       const hamburger = document.getElementById('hamburger');
@@ -850,83 +197,11 @@
           e.stopPropagation();
           navLinks.classList.toggle('active');
         });
-        navLinks.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-          });
-        });
         document.addEventListener('click', function(e) {
           if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
             navLinks.classList.remove('active');
           }
         });
-      }
-
-      // ----- RSS to JSON: fetch latest 3 videos -----
-      const RSS_URL = `https://www.youtube.com/feeds/videos.xml?user=KnighTPlayzZz001`;
-      const API_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
-
-      const container = document.getElementById('videoContainer');
-
-      fetch(API_URL)
-        .then(res => {
-          if (!res.ok) throw new Error('Network error');
-          return res.json();
-        })
-        .then(data => {
-          if (data.status !== 'ok' || !data.items || data.items.length === 0) {
-            throw new Error('No items or invalid feed');
-          }
-          const items = data.items.slice(0, 3);
-          renderVideos(items);
-        })
-        .catch(err => {
-          console.warn('RSS fetch error, using fallback:', err);
-          container.innerHTML = `
-            <div class="video-card">
-              <div class="video-thumb" style="background:#222; display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:3rem;"><i class="fab fa-youtube"></i></div>
-              <div class="video-info"><h4><a href="https://www.youtube.com/@KnighTPlayzZz001" target="_blank">Watch on YouTube</a></h4><div class="video-meta"><span><i class="fas fa-eye"></i> live</span><span><i class="fas fa-calendar"></i> now</span></div></div>
-            </div>
-            <div class="video-card">
-              <div class="video-thumb" style="background:#222; display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:3rem;"><i class="fab fa-youtube"></i></div>
-              <div class="video-info"><h4><a href="https://www.youtube.com/@KnighTPlayzZz001" target="_blank">KnighTPlayzZz live</a></h4><div class="video-meta"><span><i class="fas fa-eye"></i> featured</span><span><i class="fas fa-calendar"></i> recent</span></div></div>
-            </div>
-            <div class="video-card">
-              <div class="video-thumb" style="background:#222; display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:3rem;"><i class="fab fa-youtube"></i></div>
-              <div class="video-info"><h4><a href="https://www.youtube.com/@KnighTPlayzZz001" target="_blank">New video</a></h4><div class="video-meta"><span><i class="fas fa-eye"></i> upcoming</span><span><i class="fas fa-calendar"></i> soon</span></div></div>
-            </div>
-          `;
-        });
-
-      function renderVideos(items) {
-        let html = '';
-        items.forEach(item => {
-          let videoId = '';
-          if (item.guid) {
-            const match = item.guid.match(/(?:v=|youtu\.be\/|\/video\/)([a-zA-Z0-9_-]{11})/);
-            if (match) videoId = match[1];
-          }
-          const thumb = videoId ? `https://img.youtube.com/vi/${videoId}/mqdefault.jpg` : '';
-          const link = item.link || `https://www.youtube.com/@KnighTPlayzZz001`;
-          const title = item.title || 'KnighTPlayzZz video';
-          const pubDate = item.pubDate ? new Date(item.pubDate).toLocaleDateString() : '';
-
-          html += `
-            <div class="video-card">
-              <div class="video-thumb">
-                ${thumb ? `<img src="${thumb}" alt="${title}" loading="lazy">` : `<div style="background:#1a1a1a; width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:2.5rem; color:var(--accent);"><i class="fab fa-youtube"></i></div>`}
-              </div>
-              <div class="video-info">
-                <h4><a href="${link}" target="_blank">${title}</a></h4>
-                <div class="video-meta">
-                  <span><i class="fas fa-calendar"></i> ${pubDate || 'recent'}</span>
-                  <span><i class="fas fa-play-circle"></i> watch</span>
-                </div>
-              </div>
-            </div>
-          `;
-        });
-        container.innerHTML = html;
       }
 
     })();
