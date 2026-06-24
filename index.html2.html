@@ -125,11 +125,11 @@
       }
     }
 
-    /* ----- MAIN CONTAINER (Madness 1,000,000vh) ----- */
+    /* ----- MAIN CONTAINER (MADNESS 1,000,000vh) ----- */
     .main-container {
       width: 100%;
       max-width: 900px;
-      min-height: 1000000vh; 
+      min-height: 1000000vh; /* THE ABYSS */
       display: flex;
       flex-direction: column;
       padding: 6rem 2rem 2rem 2rem; 
@@ -142,6 +142,7 @@
       text-align: left;
       padding: 2rem 0; 
       background: transparent;
+      transition: all 0.3s ease;
     }
     .section-block h1 {
       font-size: 3.8rem;
@@ -205,6 +206,7 @@
       width: 100%;
       max-width: 600px;
       margin-top: 1rem;
+      margin-bottom: 2rem;
     }
 
     .search-wrapper {
@@ -264,9 +266,9 @@
       box-shadow: 0 0 15px var(--accent-glow);
     }
 
-    /* ----- PUSH SECTION DOWN ----- */
-    .push-down-auto {
-      margin-top: auto; 
+    /* ----- HIDING CLASS FOR SEARCH ----- */
+    .hidden-item {
+      display: none !important;
     }
 
     @media (max-width: 768px) {
@@ -304,25 +306,27 @@
   <div class="main-container">
 
     <!-- ========================================================== -->
-    <!--  SECTION 1: GetIntoPCPro (Top)                             -->
+    <!--  SEARCH BAR (Always visible at top)                        -->
     <!-- ========================================================== -->
-    <div class="section-block">
-      <h1>Get<span class="highlight">IntoPCPro</span></h1>
-      <p>- <strong>Software & Tech Hub</strong> -</p>
-      
-      <!-- SEARCH BAR -->
-      <div class="search-container">
-        <div class="search-wrapper">
-          <input type="text" id="searchInput" placeholder="Search for software, guides, tools...">
-          <button onclick="performSearch()">🔍 Search</button>
-        </div>
+    <div class="search-container" style="margin-top: 0;">
+      <div class="search-wrapper">
+        <input type="text" id="searchInput" placeholder="Search for a title...">
+        <button onclick="searchMySite()">🔍 Search</button>
       </div>
     </div>
 
     <!-- ========================================================== -->
-    <!--  SECTION 2: YouTube (Pushed to the bottom)                 -->
+    <!--  SECTION 1: GetIntoPCPro (Hidden by default)               -->
     <!-- ========================================================== -->
-    <div class="section-block push-down-auto">
+    <div class="section-block hidden-item" data-search="getintopcpro software tech hub">
+      <h1>Get<span class="highlight">IntoPCPro</span></h1>
+      <p>- <strong>Software & Tech Hub</strong> -</p>
+    </div>
+
+    <!-- ========================================================== -->
+    <!--  SECTION 2: YouTube (Hidden by default)                    -->
+    <!-- ========================================================== -->
+    <div class="section-block hidden-item" data-search="youtube legendary land">
       <h1><span class="highlight">YouTube</span></h1>
       <p>Legendary Land</p>
       <div class="hero-buttons">
@@ -354,21 +358,29 @@
 
     })();
 
-    // ----- UPDATED SEARCH FUNCTION (Redirects to YouTube) -----
-    function performSearch() {
-      const query = document.getElementById('searchInput').value.trim();
+    // ----- WORKING INTERNAL SITE SEARCH FUNCTION -----
+    function searchMySite() {
+      const query = document.getElementById('searchInput').value.trim().toLowerCase();
+      const sections = document.querySelectorAll('.section-block');
+
       if (query === "") {
-        alert("Please enter a search term!");
-      } else {
-        // This encodes the text and sends the user to the real YouTube search page
-        window.location.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+        sections.forEach(section => section.classList.add('hidden-item')); // Hide all if empty
+        return;
       }
+
+      sections.forEach(section => {
+        const searchData = section.getAttribute('data-search').toLowerCase();
+        if (searchData.includes(query)) {
+          section.classList.remove('hidden-item');
+        } else {
+          section.classList.add('hidden-item');
+        }
+      });
     }
 
-    // Allow pressing "Enter" inside the input box to trigger search
     document.getElementById('searchInput').addEventListener('keypress', function (e) {
       if (e.key === 'Enter') {
-        performSearch();
+        searchMySite();
       }
     });
   </script>
