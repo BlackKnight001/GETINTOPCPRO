@@ -136,14 +136,40 @@
       box-sizing: border-box;
     }
 
-    /* ----- SECTION STYLES (Left aligned) ----- */
+    /* ----- SECTION STYLES (Left aligned for results) ----- */
     .section-block {
       width: 100%;
-      text-align: left;
       padding: 2rem 0; 
       background: transparent;
       transition: all 0.3s ease;
     }
+    
+    /* ----- CENTERED TITLE BLOCK (Matches Navbar Design) ----- */
+    .center-block {
+      text-align: center;
+    }
+    
+    .main-title {
+      font-size: 4.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--text-primary);
+    }
+    .main-title .highlight {
+      color: var(--accent);
+      /* Removed the glow to match the navbar perfectly */
+    }
+
+    .sub-text {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      margin-top: 0.5rem;
+      font-weight: 300;
+    }
+    .sub-text strong {
+      color: var(--accent);
+    }
+
     .section-block h1 {
       font-size: 3.8rem;
       font-weight: 800;
@@ -153,7 +179,6 @@
     }
     .section-block h1 .highlight {
       color: var(--accent);
-      text-shadow: 0 0 20px var(--accent-glow);
     }
     .section-block p {
       font-size: 1.3rem;
@@ -202,10 +227,10 @@
     /* ----- SEARCH BAR STYLES (CENTERED) ----- */
     .search-container {
       display: flex;
-      justify-content: center; /* CHANGED TO CENTER */
+      justify-content: center;
       width: 100%;
       max-width: 600px;
-      margin: 0 auto 3rem auto; /* Centered and spaced */
+      margin: 0 auto 3rem auto; 
     }
 
     .search-wrapper {
@@ -271,6 +296,8 @@
     }
 
     @media (max-width: 768px) {
+      .main-title { font-size: 3rem; }
+      .sub-text { font-size: 1.1rem; }
       .section-block h1 { font-size: 2.8rem; }
       .section-block p { font-size: 1.1rem; }
       .search-container { max-width: 100%; }
@@ -279,6 +306,8 @@
       .main-container { padding: 5rem 1.5rem 2rem 1.5rem; }
     }
     @media (max-width: 480px) {
+      .main-title { font-size: 2.2rem; }
+      .sub-text { font-size: 1rem; }
       .section-block h1 { font-size: 2.2rem; }
       .section-block p { font-size: 1rem; }
     }
@@ -305,9 +334,17 @@
   <div class="main-container">
 
     <!-- ========================================================== -->
-    <!--  SEARCH BAR (CENTERED)                                     -->
+    <!--  SECTION 1: GetIntoPCPro (ALWAYS VISIBLE & CENTERED)       -->
     <!-- ========================================================== -->
-    <div class="search-container">
+    <div class="center-block">
+      <h1 class="main-title"><span class="highlight">Get</span>Into<span class="highlight">PCPro</span></h1>
+      <p class="sub-text" style="text-align: center; max-width: none;">- <strong>Software & Tech Hub</strong> -</p>
+    </div>
+
+    <!-- ========================================================== -->
+    <!--  SEARCH BAR (PUSHED DOWN LITTLE)                           -->
+    <!-- ========================================================== -->
+    <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 4rem;">
       <div class="search-wrapper">
         <input type="text" id="searchInput" placeholder="Search for a title...">
         <button onclick="searchMySite()">🔍 Search</button>
@@ -315,15 +352,7 @@
     </div>
 
     <!-- ========================================================== -->
-    <!--  SECTION 1: GetIntoPCPro (Hidden by default)               -->
-    <!-- ========================================================== -->
-    <div class="section-block hidden-item" data-search="getintopcpro software tech hub">
-      <h1>Get<span class="highlight">IntoPCPro</span></h1>
-      <p>- <strong>Software & Tech Hub</strong> -</p>
-    </div>
-
-    <!-- ========================================================== -->
-    <!--  SECTION 2: YouTube (Hidden by default)                    -->
+    <!--  SECTION 2: YouTube (Hidden by default, searchable)        -->
     <!-- ========================================================== -->
     <div class="section-block hidden-item" data-search="youtube legendary land">
       <h1><span class="highlight">YouTube</span></h1>
@@ -363,16 +392,24 @@
       const sections = document.querySelectorAll('.section-block');
 
       if (query === "") {
-        sections.forEach(section => section.classList.add('hidden-item')); // Hide all if empty
+        // Hide only searchable sections, leave the top one visible
+        sections.forEach(section => {
+          if(section.hasAttribute('data-search')) {
+            section.classList.add('hidden-item');
+          }
+        });
         return;
       }
 
       sections.forEach(section => {
-        const searchData = section.getAttribute('data-search').toLowerCase();
-        if (searchData.includes(query)) {
-          section.classList.remove('hidden-item');
-        } else {
-          section.classList.add('hidden-item');
+        const searchData = section.getAttribute('data-search');
+        // Only process sections with search data
+        if (searchData) {
+          if (searchData.toLowerCase().includes(query)) {
+            section.classList.remove('hidden-item');
+          } else {
+            section.classList.add('hidden-item');
+          }
         }
       });
     }
@@ -384,4 +421,4 @@
     });
   </script>
 </body>
-</html>
+</html> 
