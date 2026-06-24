@@ -125,11 +125,11 @@
       }
     }
 
-    /* ----- MAIN CONTAINER (MADNESS 1,000,000vh) ----- */
+    /* ----- MAIN CONTAINER (Madness 1,000,000vh) ----- */
     .main-container {
       width: 100%;
       max-width: 900px;
-      min-height: 1000000vh; /* THE ABYSS */
+      min-height: 1000000vh; 
       display: flex;
       flex-direction: column;
       padding: 6rem 2rem 2rem 2rem; 
@@ -299,7 +299,7 @@
   </nav>
 
   <!-- ============================================================ -->
-  <!--  MAIN WRAPPER (THE INFINITE VOID)                            -->
+  <!--  MAIN WRAPPER (MADNESS ONE)                                  -->
   <!-- ============================================================ -->
   <div class="main-container">
 
@@ -320,7 +320,7 @@
     </div>
 
     <!-- ========================================================== -->
-    <!--  SECTION 2: YouTube (Pushed to the bottom of the abyss)    -->
+    <!--  SECTION 2: YouTube (Pushed to the bottom)                 -->
     <!-- ========================================================== -->
     <div class="section-block push-down-auto">
       <h1><span class="highlight">YouTube</span></h1>
@@ -354,16 +354,18 @@
 
     })();
 
-    // ----- SEARCH FUNCTION -----
+    // ----- UPDATED SEARCH FUNCTION (Redirects to YouTube) -----
     function performSearch() {
       const query = document.getElementById('searchInput').value.trim();
       if (query === "") {
         alert("Please enter a search term!");
       } else {
-        alert(`Searching for: "${query}" ...`);
+        // This encodes the text and sends the user to the real YouTube search page
+        window.location.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
       }
     }
 
+    // Allow pressing "Enter" inside the input box to trigger search
     document.getElementById('searchInput').addEventListener('keypress', function (e) {
       if (e.key === 'Enter') {
         performSearch();
