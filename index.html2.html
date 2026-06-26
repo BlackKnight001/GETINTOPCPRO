@@ -159,7 +159,7 @@
       align-self: flex-start;
       max-height: calc(100vh - 120px);
       overflow-y: visible;
-      padding-right: 1rem;   /* <-- give space on right */
+      padding-right: 1rem;
       padding-left: 0rem;
       margin-right: 0rem;
     }
@@ -167,7 +167,7 @@
     .sidebar .ad-box {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border-glass);
-      border-radius: 16px;   /* back to normal rounded corners */
+      border-radius: 16px;
       padding: 0.8rem;
       text-align: center;
       backdrop-filter: blur(8px);
@@ -179,6 +179,7 @@
       justify-content: center;
       width: 100%;
       overflow: hidden;
+      position: relative;
     }
 
     .sidebar .ad-box .ad-label {
@@ -202,6 +203,22 @@
     .ad-container iframe {
       max-width: 100%;
       border: none;
+    }
+
+    /* Fallback image styles */
+    .ad-fallback {
+      display: none;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+    .ad-fallback img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border-glass);
+    }
+    .ad-fallback.show {
+      display: block;
     }
 
     /* ----- SECTION STYLES (Left aligned for results) ----- */
@@ -474,24 +491,34 @@
     <!-- ====================== RIGHT SIDEBAR ====================== -->
     <aside class="sidebar">
 
-      <!-- AD 1: code 1 -->
+      <!-- AD 1: code 1 + fallback image -->
       <div class="ad-box">
         <div class="ad-label">— Ad —</div>
         <div class="ad-container" id="ad1">
           <script src="https://pl29901512.effectivecpmnetwork.com/09/e9/b2/09e9b25b8e90a3c225481150ef6012a0.js"></script>
         </div>
+        <div class="ad-fallback" id="fallback1">
+          <a href="https://exe.io/ref/amblackknight" target="_blank">
+            <img src="https://exe.io/img/ref/r1.gif" alt="Ad" title="Ad">
+          </a>
+        </div>
       </div>
 
-      <!-- AD 2: code 2 -->
+      <!-- AD 2: code 2 + fallback image -->
       <div class="ad-box">
         <div class="ad-label">— Ad —</div>
         <div class="ad-container" id="ad2">
           <script async="async" data-cfasync="false" src="https://pl29901513.effectivecpmnetwork.com/b363ee42b4f5d97f4e407ff8b00b94d4/invoke.js"></script>
           <div id="container-b363ee42b4f5d97f4e407ff8b00b94d4"></div>
         </div>
+        <div class="ad-fallback" id="fallback2">
+          <a href="https://exe.io/ref/amblackknight" target="_blank">
+            <img src="https://exe.io/img/ref/r4.png" alt="Ad" title="Ad">
+          </a>
+        </div>
       </div>
 
-      <!-- AD 3: code 3 -->
+      <!-- AD 3: code 3 + fallback image -->
       <div class="ad-box">
         <div class="ad-label">— Ad —</div>
         <div class="ad-container" id="ad3">
@@ -506,9 +533,14 @@
           </script>
           <script src="https://www.highperformanceformat.com/3a97542bbb8060a70bb17a8202fc2ecd/invoke.js"></script>
         </div>
+        <div class="ad-fallback" id="fallback3">
+          <a href="https://exe.io/ref/amblackknight" target="_blank">
+            <img src="https://exe.io/img/ref/r1.gif" alt="Ad" title="Ad">
+          </a>
+        </div>
       </div>
 
-      <!-- AD 4: code 4 -->
+      <!-- AD 4: code 4 + fallback image -->
       <div class="ad-box">
         <div class="ad-label">— Ad —</div>
         <div class="ad-container" id="ad4">
@@ -522,6 +554,11 @@
             };
           </script>
           <script src="https://www.highperformanceformat.com/c5efb1baffc3187434cb9112491eb73e/invoke.js"></script>
+        </div>
+        <div class="ad-fallback" id="fallback4">
+          <a href="https://exe.io/ref/amblackknight" target="_blank">
+            <img src="https://exe.io/img/ref/r4.png" alt="Ad" title="Ad">
+          </a>
         </div>
       </div>
 
@@ -547,6 +584,21 @@
           }
         });
       }
+
+      // ----- FALLBACK: show images if ad containers are empty after 5s -----
+      setTimeout(function() {
+        const containers = document.querySelectorAll('.ad-container');
+        containers.forEach(function(container, index) {
+          // Check if container has any child elements (script might have injected iframe or div)
+          // If not, show fallback
+          if (container.children.length === 0 || container.innerHTML.trim() === '') {
+            const fallback = document.getElementById('fallback' + (index + 1));
+            if (fallback) {
+              fallback.classList.add('show');
+            }
+          }
+        });
+      }, 5000);
 
     })();
 
